@@ -1,0 +1,22 @@
+{{- $fullName := include "gosheap.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}-ingress
+  annotations:
+    kubernets.io/ingress.class: "nginx"
+  labels:
+    {{- include "gosheap.labels" . | nindent 4 }}
+spec:
+  rules:
+    - host: {{ $fullName }}.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}-service
+                port:
+                  number: {{ $svcPort }}

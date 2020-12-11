@@ -1,0 +1,34 @@
+replicaCount: 1
+containerPort: 3000
+
+image:
+  repository: vissarionas/gosheap
+  tag: 1.0
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 3000
+  targetPort: 3000
+
+ingress:
+  enabled: true
+  hosts:
+    - host: ""
+      paths: []
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+tolerations: []
+
+affinity: {}
+
+mongodb:
+  # architecture: replicaset
+  auth:
+    enabled: false
