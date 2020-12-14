@@ -18,7 +18,7 @@ spec:
         - name: {{ .Chart.Name }}
           env:
           - name: MONGODB_URL
-            value: mongodb://gosheap-mongodb:27017/gosheap
+            value: mongodb://experiment-mongodb:27017/gosheap
           image:  "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:

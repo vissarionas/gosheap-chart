@@ -1,6 +1,6 @@
 {{- $fullName := include "gosheap.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}-ingress
@@ -10,13 +10,10 @@ metadata:
     {{- include "gosheap.labels" . | nindent 4 }}
 spec:
   rules:
-    - host: {{ $fullName }}.local
+    - host: {{ $fullName }}.stage.piaas.it-k8s.in.pan-net.eu
       http:
         paths:
           - path: /
-            pathType: Prefix
             backend:
-              service:
-                name: {{ $fullName }}-service
-                port:
-                  number: {{ $svcPort }}
+              serviceName: {{ $fullName }}-service
+              servicePort: {{ $svcPort }}
